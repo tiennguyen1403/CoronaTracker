@@ -2,6 +2,7 @@ import './App.css';
 import { useSelector } from 'react-redux';
 import { ThemeProvider } from "styled-components";
 import GlobalLoading from "./pages/GlobalLoading";
+import PrivateRoute from "./HOCs/PrivateRoute";
 import Home from './pages/Home';
 import Analytics from './pages/Analytics';
 import DetailCountry from './pages/DetailCountry';
@@ -23,9 +24,9 @@ function App() {
         <GlobalLoading />
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/analytics" component={Analytics}/>
-            <Route path="/country/:countrycode" component={DetailCountry}/>
+            <PrivateRoute exact path="/" component={Home}/>
+            <PrivateRoute path="/analytics" component={Analytics}/>
+            <PrivateRoute path="/country/:countrycode" component={DetailCountry}/>
             <Route path="/news" component={News}/>
             <Route component={NotFound}/>
           </Switch>

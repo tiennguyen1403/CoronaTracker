@@ -6,7 +6,6 @@ const initialState = {
     detailCountry: {},
     historyInfo: {}, 
     isLoading: true,
-    darkMode: false,
 }
 
 const globalSlice = createSlice({
@@ -27,9 +26,6 @@ const globalSlice = createSlice({
         },
         setIsLoading(state,action){
             state.isLoading = action.payload;
-        },
-        toggleDarkMode(state,action){
-            state.darkMode = !state.darkMode;
         },
         resetStore(){
             return initialState;

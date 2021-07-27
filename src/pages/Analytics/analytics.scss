@@ -1,0 +1,154 @@
+.analytics-container{
+    width: 100%;
+    background: #fff;
+    padding: 0 10px;
+    .analytics{
+        & > h1{
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 0;
+            margin: 10px 0;
+        }
+        &__info-card{
+            border-radius: 5px;
+            .card-group{
+                display: flex;
+                justify-content: space-between;
+                .infected-card,
+                .recovered-card,
+                .deaths-card{
+                    width: 32%;
+                    border-radius: 5px;
+                    text-align: center;
+                    font-weight: bold;
+                    height: 110px;
+                    p{
+                        margin-bottom: 0;
+                        line-height: 40px;
+                        font-size: 15.7px;
+                    }
+                }
+                .infected-card{
+                    background: #fff5f5;
+                    &__title{
+                        color: #e53e3e;
+                    }
+                    div.ant-card-head{
+                        background: #fed7d7;
+                    }
+                    p{
+                        color: #e53e3e;
+                    }
+                }
+                .recovered-card{
+                    background: #f0fff4;
+                    &__title{
+                        color: #38a169;
+                    }
+                    div.ant-card-head{
+                        background: #c6f6d5;
+                    }
+                    p{
+                        color: #38a169;
+                    }
+                }
+                .deaths-card{
+                    background: #edf2f7;
+                    &__title{
+                        color: #718096;
+                    }
+                    div.ant-card-head{
+                        background: #e2e8f0;
+                    }
+                    p{
+                        color: #718096;
+                    }
+                }
+            }
+        }
+        &__info-table{
+            margin-top: 15px;
+            .table{
+                width: 100%;
+                overflow-x: scroll;
+            }
+        }
+        &__line-chart{
+            margin-top: 15px;
+        }
+        &__bar-chart{
+            margin-top: 15px;
+        }
+        &__map{
+            margin-top: 15px;
+        }
+
+        &__info-table,
+        &__line-chart,
+        &__bar-chart,
+        &__map{
+            border: 1px solid #cbd5e0;
+        }
+    }
+}
+
+@media screen and (min-width: 576px){
+    .analytics-container{
+        padding: 0 20px;
+        .analytics{
+            &__info-card{
+                .card-group{
+                    .infected-card,
+                    .recovered-card,
+                    .deaths-card{
+                        &__title{
+                            font-size: 15px;
+                        }
+                        p{
+                            font-size: 23px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1024px){
+    .analytics-container{
+        .analytics{
+            & > h1{
+                font-size: 24px;
+            }
+            &__info-card,
+            &__info-table,
+            &__line-chart,
+            &__bar-chart,
+            &__map{
+                width: 49.5%;
+            }
+            &__info-card{
+                float: left;
+            }
+            &__map{
+                float: right;
+                margin: 20px 0;
+            }
+            &__info-table{
+                float: right;
+                margin: 0;
+            }
+            &__line-chart{
+                margin-top: 20px;
+                float: left;
+            }
+            &__bar-chart{
+                margin-top: 20px;
+                float: left;
+            }
+        }
+    }
+    .footer-container{
+        clear: both;
+    }
+}

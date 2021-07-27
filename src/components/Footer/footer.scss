@@ -1,0 +1,15 @@
+.footer-container{
+    margin-top: 30px;
+    background: #108885;
+    padding: 0 10px;
+    width: 100%;
+    .footer{
+        height: 50px;
+        color: #fff;
+        text-align: center;
+        span{
+            line-height: 50px;
+            font-weight: 600;
+        }
+    }
+}

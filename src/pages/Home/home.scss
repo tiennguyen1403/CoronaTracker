@@ -1,0 +1,188 @@
+.home-container{
+    margin-top: 25px;
+    width: 100%;
+    padding: 0 10px;
+    .home{
+        &__info-card{
+            border: 1px solid#cbd5e0;
+            border-radius: 5px;
+            padding: 10px;
+            .title{
+                margin: 0;
+            }
+            & > .country-selector{
+                .select{
+                    width: 100%;
+                    margin: 10px 0;
+                }
+            }
+            .card-group{
+                display: flex;
+                justify-content: space-between;
+                .infected-card,
+                .recovered-card,
+                .deaths-card{
+                    width: 31%;
+                    border-radius: 5px;
+                    text-align: center;
+                    font-weight: bold;
+                    height: 110px;
+                }
+                .infected-card{
+                    background: #fff5f5;
+                    &__title{
+                        color: #e53e3e;
+                    }
+                    div.ant-card-head{
+                        background: #fed7d7;
+                    }
+                    p{
+                        color: #e53e3e;
+                        margin-bottom: 0;
+                        line-height: 40px;
+                    }
+                }
+                .recovered-card{
+                    background: #f0fff4;
+                    &__title{
+                        color: #38a169;
+                    }
+                    div.ant-card-head{
+                        background: #c6f6d5;
+                    }
+                    p{
+                        color: #38a169;
+                        margin-bottom: 0;
+                        line-height: 40px;
+                    }
+                }
+                .deaths-card{
+                    background: #edf2f7;
+                    &__title{
+                        color: #718096;
+                    }
+                    div.ant-card-head{
+                        background: #e2e8f0;
+                    }
+                    p{
+                        color: #718096;
+                        margin-bottom: 0;
+                        line-height: 40px;
+                    }
+                }
+            }
+            & > a{
+                display: block;
+                text-align: center;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+        }
+        &__info-table{
+            .table{
+                width: 100%;
+                overflow-x: scroll;
+            }
+            border-radius: 5px;
+            margin-top: 15px;
+            .title{
+                padding: 5px 0;
+                padding-left: 10px;
+                border-left: 5px solid #108885;
+                color: #108885;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 576px){
+    .home-container{
+        .home{
+            &__info-card{
+                .title{
+                    font-size: 18px;
+                }
+                .card-group{
+                    .infected-card,
+                    .recovered-card,
+                    .deaths-card{
+                        height: 130px;
+                        &__title{
+                            font-size: 16px;
+                        }
+                        p{
+                            font-size: 23px;
+                            line-height: 60px;
+                        }
+                    }
+                }
+                & > a{
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px){
+    .home-container{
+        .home{
+            &__info-card{
+                .title{
+                    font-size: 20px;
+                }
+                .card-group{
+                    .infected-card,
+                    .recovered-card,
+                    .deaths-card{
+                        &__title{
+                            font-size: 18px;
+                        }
+                        p{
+                            font-size: 27px;
+                            line-height: 55px;
+                        }
+                    }
+                }
+                & > a{
+                    font-size: 17px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 992px){
+    .home-container{
+        .home{
+            &__info-card{
+                width: 53%;
+                float: left;
+                .card-group{
+                    .infected-card,
+                    .recovered-card,
+                    .deaths-card{
+                        width: 32%;
+                        p{
+                            font-size: 23px;
+                        }
+                    }
+                }
+            }
+            &__info-table{
+                float: right;
+                width: 46%;
+                margin-top: 0;
+                margin-bottom: 20px;
+            }
+            & > .news-list-container{
+                float: left;
+                margin: 20px 0;
+                width: 53%;
+            }
+        }
+    }
+    .footer-container{
+        clear: both;
+    }
+}

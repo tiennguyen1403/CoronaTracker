@@ -1,0 +1,220 @@
+.detail-container{
+    margin-top: 25px;
+    width: 100%;
+    padding: 0 10px;
+    .detail{
+        & > .country-selector{
+            .select{
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+        &__info-card{
+            border: 1px solid#cbd5e0;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 5px;
+            &__title{
+                display: flex;
+                align-items: center;
+                margin-bottom: 5px;
+                img{
+                    width: 30px;
+                    margin-right: 10px;
+                }
+                span{
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+            }
+            & > .card-group{
+                display: flex;
+                justify-content: space-between;
+                .infected-card,
+                .recovered-card,
+                .deaths-card{
+                    width: 32%;
+                    border-radius: 5px;
+                    text-align: center;
+                    font-weight: bold;
+                    height: 120px;
+                    p{
+                        font-size: 16px;
+                        margin-bottom: 0;
+                        line-height: 30px;
+                    }
+                    p:last-child{
+                        line-height: 15px;
+                        font-size: 11px;
+                    }
+                }
+                .infected-card{
+                    background: #fff5f5;
+                    &__title{
+                        color: #e53e3e;
+                        font-weight: bold;
+                    }
+                    div.ant-card-head{
+                        background: #fed7d7;
+                    }
+                    p{
+                        color: #e53e3e;
+                    }
+                }
+                .recovered-card{
+                    background: #f0fff4;
+                    &__title{
+                        color: #38a169;
+                        font-weight: bold;
+                    }
+                    div.ant-card-head{
+                        background: #c6f6d5;
+                    }
+                    p{
+                        color: #38a169;
+                    }
+                }
+                .deaths-card{
+                    background: #edf2f7;
+                    &__title{
+                        color: #718096;
+                        font-weight: bold;
+                    }
+                    div.ant-card-head{
+                        background: #e2e8f0;
+                    }
+                    p{
+                        color: #718096;
+                    }
+                }
+            }
+        }
+        &__rate-card{
+            margin-top: 15px;
+            &__fatality,
+            &__recovery{
+                border: 1px solid #cbd5e0;
+                border-radius: 5px;
+                min-height: 100px;
+                padding: 5px 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                p{
+                    margin: 0;
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+                span{
+                    font-size: 23px;
+                    font-weight: bold;
+                }
+            }
+            &__fatality{
+                p{
+                    color: #595959; 
+                }
+                span{
+                    color: #ff4d4f;
+                }
+            }
+            &__recovery{
+                margin-top: 10px;
+                p{
+                    color: #595959; 
+                }
+                span{
+                    color: #13c2c2;
+                }
+            }
+        }
+        &__bar-chart{
+            border: 1px solid#cbd5e0;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        &__line-chart{
+            border: 1px solid#cbd5e0;
+            border-radius: 5px;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+    }
+}
+
+@media screen and (min-width: 576px){
+    .detail-container{
+        padding: 0 20px;
+        .detail{
+            &__info-card{
+                &__title{
+                    margin-bottom: 10px;
+                }
+                & > .card-group{
+                    .infected-card,
+                    .recovered-card,
+                    .deaths-card{
+                        &__title{
+                            font-size: 15px;
+                        }
+                        p{
+                            font-size: 22px;
+                        }
+                        p:last-child{
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 768px){
+    .detail-container{
+        .detail{
+            &__rate-card{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &__fatality,
+                &__recovery{
+                    width: 49%;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 992px){
+    .detail-container{
+        position: relative;
+        .detail{
+            & > .country-selector,
+            &__info-card,
+            &__rate-card,
+            &__bar-chart,
+            &__line-chart,
+            & > .news-list-container{
+                width: 48.5%;
+            }
+            &__bar-chart{
+                position: absolute;
+                top: 0;
+                right: 20px;
+                margin: 0;
+            }
+            &__line-chart{
+                position: absolute;
+                top: 44%;
+                right: 20px;
+            }
+            & > .news-list-container{
+                margin-top: 20px;
+            }
+        }
+    }
+}

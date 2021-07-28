@@ -6,7 +6,6 @@ import axios from "axios";
 
 import "./analytics.scss";
 import { GlobalActions } from "../../redux/rootAction";
-import Wrapper from "../../HOCs/Wrapper";
 import InfoCard from "./components/InfoCard";
 import InfoTable from "./components/InfoTable";
 import LineChart from "./components/LineChart";
@@ -21,6 +20,7 @@ function Analytics() {
   const [mapData, setMapData] = useState({});
   const countries = useSelector((state) => state.GlobalReducer.countries);
   const totalInfo = useSelector((state) => state.GlobalReducer.totalInfo);
+  const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
 
   const getCountries = () => {
     axios("https://disease.sh/v3/covid-19/countries")
@@ -70,7 +70,11 @@ function Analytics() {
       {isLocalLoading ? (
         <div></div>
       ) : (
-        <div className="analytics-container">
+        <div
+          className={
+            darkMode ? "dark-analytics-container" : "analytics-container"
+          }
+        >
           <div className="analytics">
             <h1>{t("Analytics.Title")}</h1>
             <InfoCard totalInfo={totalInfo} />
@@ -85,4 +89,4 @@ function Analytics() {
   );
 }
 
-export default Wrapper(Analytics);
+export default Analytics;

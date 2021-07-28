@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "antd/dist/antd.css";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Skeleton } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import "./news.scss";
 import { GlobalActions } from "../../redux/rootAction";
-import Wrapper from "../../HOCs/Wrapper";
 import NewsCard from "./components/NewsCard";
 
 function News() {
   const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
   const [isLocalLoading, setIsLocalLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [newsList, setNewsList] = useState([]);
@@ -54,7 +54,7 @@ function News() {
           <Skeleton className="skeleton" />
         </div>
       ) : (
-        <div className="news-container">
+        <div className={darkMode ? "dark-news-container" : "news-container"}>
           <div className="news">
             <div className="news__news-list">
               <InfiniteScroll
@@ -74,4 +74,4 @@ function News() {
   );
 }
 
-export default Wrapper(News);
+export default News;

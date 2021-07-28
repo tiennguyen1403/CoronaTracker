@@ -5,7 +5,6 @@ import axios from "axios";
 
 import "./home.scss";
 import { GlobalActions } from "../../redux/rootAction";
-import Wrapper from "../../HOCs/Wrapper";
 import InfoCard from "./components/InfoCard";
 import InfoTable from "./components/InfoTable";
 import NewsList from "../../components/NewsList";
@@ -15,6 +14,7 @@ function Home({ history }) {
   const [isLocalLoading, setIsLocalLoading] = useState(true);
   const countries = useSelector((state) => state.GlobalReducer.countries);
   const totalInfo = useSelector((state) => state.GlobalReducer.totalInfo);
+  const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
 
   const getCountries = () => {
     axios("https://disease.sh/v3/covid-19/countries")
@@ -50,7 +50,7 @@ function Home({ history }) {
       {isLocalLoading ? (
         <div></div>
       ) : (
-        <div className="home-container">
+        <div className={darkMode ? "dark-home-container" : "home-container"}>
           <div className="home">
             <InfoCard
               countries={countries}
@@ -66,4 +66,4 @@ function Home({ history }) {
   );
 }
 
-export default Wrapper(Home);
+export default Home;

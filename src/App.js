@@ -2,6 +2,7 @@ import './App.css';
 import { useSelector } from 'react-redux';
 import GlobalLoading from "./pages/GlobalLoading";
 import PrivateRoute from "./HOCs/PrivateRoute";
+import Header from './components/Header';
 import Home from './pages/Home';
 import Analytics from './pages/Analytics';
 import DetailCountry from './pages/DetailCountry';
@@ -18,6 +19,7 @@ function App() {
     <>
       <GlobalLoading />
       <BrowserRouter>
+      <Header />
         <Switch>
           <PrivateRoute exact path="/" component={Home}/>
           <PrivateRoute path="/analytics" component={Analytics}/>

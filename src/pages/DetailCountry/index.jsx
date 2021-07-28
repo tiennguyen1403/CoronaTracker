@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import "./detail.scss";
-import Wrapper from "../../HOCs/Wrapper";
 import CountrySelector from "../../components/CountrySelector";
 import InfoCard from "./components/InfoCard";
 import RateCard from "./components/RateCard";
@@ -22,6 +21,7 @@ function DetailCountry({ history }) {
   const detailCountry = useSelector(
     (state) => state.GlobalReducer.detailCountry
   );
+  const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
 
   const getCountries = () => {
     axios("https://disease.sh/v3/covid-19/countries")
@@ -65,7 +65,9 @@ function DetailCountry({ history }) {
       {isLocalLoading ? (
         <div></div>
       ) : (
-        <div className="detail-container">
+        <div
+          className={darkMode ? "dark-detail-container" : "detail-container"}
+        >
           <div className="detail">
             <CountrySelector countries={countries} history={history} />
             <InfoCard detailCountry={detailCountry} />
@@ -80,4 +82,4 @@ function DetailCountry({ history }) {
   );
 }
 
-export default Wrapper(DetailCountry);
+export default DetailCountry;

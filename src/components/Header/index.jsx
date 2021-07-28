@@ -2,17 +2,23 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MenuOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Switch } from "antd";
+import { FiSun, FiMoon } from "react-icons/fi";
 
 import "./header.scss";
 import Login from "../Login";
 import Register from "../Register";
 import LanguageSelector from "../LanguageSelector";
+import { GlobalActions } from "../../redux/rootAction";
 
 function Header() {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
   const [isLoginVisible, setIsLoginVisible] = useState(false);
   const [isRegisterVisible, setIsRegisterVisible] = useState(false);
+  const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
 
   const toggleLogin = () => {
     setIsLoginVisible(!isLoginVisible);
@@ -25,7 +31,7 @@ function Header() {
   };
 
   return (
-    <div className="header-container">
+    <div className={darkMode ? "dark-header-container" : "header-container"}>
       <Login isLoginVisible={isLoginVisible} toggleLogin={toggleLogin} />
       <Register
         isRegisterVisible={isRegisterVisible}
@@ -80,6 +86,17 @@ function Header() {
             </li>
             <li>
               <LanguageSelector />
+            </li>
+            <li>
+              <Switch
+                checkedChildren={
+                  <FiMoon style={{ transform: "translateY(10%)" }} />
+                }
+                unCheckedChildren={
+                  <FiSun style={{ transform: "translateY(10%)" }} />
+                }
+                onChange={() => dispatch(GlobalActions.toggleDarkMode())}
+              />
             </li>
           </ul>
         </div>

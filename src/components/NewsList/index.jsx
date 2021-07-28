@@ -10,6 +10,7 @@ function NewsList() {
   const [isLoading, setIsLoading] = useState(true);
   const [newsList, setNewsList] = useState([]);
   const [page, setPage] = useState(1);
+
   const getNewsList = () => {
     axios(`http://localhost:8000/newslist?_page=${page}&_limit=5`)
       .then((res) => {

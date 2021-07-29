@@ -12,7 +12,7 @@ function Login(props) {
   const [userList, setUserList] = useState([]);
 
   const getUserList = () => {
-    axios("http://localhost:8000/userlist")
+    axios("https://corona--tracker.herokuapp.com/userlist")
       .then((res) => {
         setUserList(res.data);
       })

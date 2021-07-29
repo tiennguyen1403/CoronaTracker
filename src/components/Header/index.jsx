@@ -58,6 +58,9 @@ function Header() {
             <li>
               <Link to="/analytics">{t("Header.Analytics")}</Link>
             </li>
+            <li>
+              <Link to="/news">{t("Header.News")}</Link>
+            </li>
             {isLoggedIn ? (
               <li>
                 <a href="#a" onClick={handleLogout}>
@@ -78,12 +81,6 @@ function Header() {
                 </li>
               </>
             )}
-            <li>
-              <Link to="/news">{t("Header.News")}</Link>
-            </li>
-            <li>
-              <a href="#a">{t("Header.About")}</a>
-            </li>
             <li>
               <LanguageSelector />
             </li>

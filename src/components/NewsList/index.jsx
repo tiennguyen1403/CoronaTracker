@@ -12,7 +12,9 @@ function NewsList() {
   const [page, setPage] = useState(1);
 
   const getNewsList = () => {
-    axios(`http://localhost:8000/newslist?_page=${page}&_limit=5`)
+    axios(
+      `https://corona--tracker.herokuapp.com/newslist?_page=${page}&_limit=5`
+    )
       .then((res) => {
         setNewsList(res.data);
         setIsLoading(false);

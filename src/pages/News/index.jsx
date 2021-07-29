@@ -13,11 +13,16 @@ function News() {
   const dispatch = useDispatch();
   const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
   const [isLocalLoading, setIsLocalLoading] = useState(true);
-  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 12,
+  });
   const [newsList, setNewsList] = useState([]);
 
   const getNewsList = () => {
-    axios(`http://localhost:8000/newslist?_page=${page}&_limit=12`)
+    axios(
+      `https://corona--tracker.herokuapp.com/newslist?_page=${pagination.page}&_limit=${pagination.limit}`
+    )
       .then((res) => {
         setNewsList(newsList.concat(res.data));
         setIsLocalLoading(false);
@@ -35,7 +40,7 @@ function News() {
 
   useEffect(() => {
     getNewsList();
-  }, [page]);
+  }, [pagination]);
   return (
     <>
       {isLocalLoading ? (
@@ -59,7 +64,9 @@ function News() {
             <div className="news__news-list">
               <InfiniteScroll
                 dataLength={newsList.length}
-                next={() => setPage(page + 1)}
+                next={() =>
+                  setPagination({ ...pagination, page: pagination.page + 1 })
+                }
                 hasMore={true}
                 loader={<h4>Loading...</h4>}
                 style={{ overflowY: "hidden" }}

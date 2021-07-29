@@ -70,6 +70,15 @@
             .table{
                 width: 100%;
                 overflow-x: scroll;
+                div.ant-select-selector{
+                    display: none;
+                }
+                .ant-table-pagination-right{
+                    justify-content: center;
+                }
+                li.ant-pagination-options{
+                    display: none;
+                }
             }
         }
         &__line-chart{
@@ -192,6 +201,15 @@
                         color: white;
                     }
                 }
+                div.ant-select-selector{
+                    display: none;
+                }
+                .ant-table-pagination-right{
+                    justify-content: center;
+                }
+                li.ant-pagination-options{
+                    display: none;
+                }
             }
         }
         &__line-chart{
@@ -248,20 +266,6 @@
                             font-size: 23px;
                         }
                     }
-                }
-            }
-        }
-    }
-}
-
-@media screen and (min-width: 768px){
-    .dark-analytics-container{
-        .analytics{
-            &__info-table{
-                .ant-select-selector{
-                    background: none;
-                    border-color: white;
-                    color: white;
                 }
             }
         }

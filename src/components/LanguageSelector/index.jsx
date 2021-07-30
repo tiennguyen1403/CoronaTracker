@@ -6,14 +6,14 @@ const { Option } = Select;
 
 function LanguageSelector() {
   const { i18n } = useTranslation();
-  const [selectedLang, setSelectedLang] = useState("en");
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
   const handleChangeLanguage = (value) => {
-    setSelectedLang(value);
+    setSelectedLanguage(value);
     i18n.changeLanguage(value);
   };
   return (
     <Select
-      defaultValue={selectedLang}
+      defaultValue={selectedLanguage}
       style={{ width: 60 }}
       onChange={handleChangeLanguage}
     >

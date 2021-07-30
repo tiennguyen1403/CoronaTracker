@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { MenuOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Switch } from "antd";
-import { FiSun, FiMoon } from "react-icons/fi";
+import { Switch, notification } from "antd";
+import { RiSunFill, RiMoonFill } from "react-icons/ri";
 
 import "./header.scss";
 import Login from "../Login";
@@ -28,6 +28,12 @@ function Header() {
   };
   const handleLogout = () => {
     localStorage.setItem("isLoggedIn", false);
+    openLogoutNotification();
+  };
+  const openLogoutNotification = () => {
+    notification["success"]({
+      message: "You are logged out!",
+    });
   };
 
   return (
@@ -63,21 +69,21 @@ function Header() {
             </li>
             {isLoggedIn ? (
               <li>
-                <a href="#a" onClick={handleLogout}>
+                <span className="logout-btn" onClick={handleLogout}>
                   {t("Header.Logout")}
-                </a>
+                </span>
               </li>
             ) : (
               <>
                 <li>
-                  <a href="#a" onClick={toggleLogin}>
+                  <span className="login-btn" onClick={toggleLogin}>
                     {t("Header.Login")}
-                  </a>
+                  </span>
                 </li>
                 <li>
-                  <a href="#a" onClick={toggleRegister}>
+                  <span className="register-btn" onClick={toggleRegister}>
                     {t("Header.Register")}
-                  </a>
+                  </span>
                 </li>
               </>
             )}
@@ -87,10 +93,12 @@ function Header() {
             <li>
               <Switch
                 checkedChildren={
-                  <FiMoon style={{ transform: "translateY(10%)" }} />
+                  <RiMoonFill
+                    style={{ transform: "translateY(10%)", color: "#f0c420" }}
+                  />
                 }
                 unCheckedChildren={
-                  <FiSun style={{ transform: "translateY(10%)" }} />
+                  <RiSunFill style={{ transform: "translateY(10%)" }} />
                 }
                 onChange={() => dispatch(GlobalActions.toggleDarkMode())}
               />

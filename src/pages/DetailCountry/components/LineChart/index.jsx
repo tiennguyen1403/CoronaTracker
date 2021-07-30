@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highchart from "highcharts";
 import moment from "moment";
+import _ from "lodash";
 
 const generateOptions = (detailHistory) => {
-  const categories = Object.keys(detailHistory.cases).map((item) =>
+  const categories = _.keys(detailHistory.cases).map((item) =>
     moment(item).format("DD/MM/YY")
   );
   return {
@@ -56,15 +57,15 @@ const generateOptions = (detailHistory) => {
     series: [
       {
         name: "Cases",
-        data: Object.values(detailHistory.cases),
+        data: _.values(detailHistory.cases),
       },
       {
         name: "Recovered",
-        data: Object.values(detailHistory.recovered),
+        data: _.values(detailHistory.recovered),
       },
       {
         name: "Deaths",
-        data: Object.values(detailHistory.deaths),
+        data: _.values(detailHistory.deaths),
       },
     ],
   };

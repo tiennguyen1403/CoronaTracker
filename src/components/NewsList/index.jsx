@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import "./newslist.scss";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { Pagination, Typography, Skeleton } from "antd";
 const { Title } = Typography;
 
 function NewsList() {
   const { t } = useTranslation();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLocalLoading, setIsLocalLoading] = useState(true);
   const [newsList, setNewsList] = useState([]);
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    getNewsList();
+  }, [page]);
 
   const getNewsList = () => {
     axios(
@@ -17,7 +21,7 @@ function NewsList() {
     )
       .then((res) => {
         setNewsList(res.data);
-        setIsLoading(false);
+        setIsLocalLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -39,19 +43,14 @@ function NewsList() {
       </div>
     ));
   };
-  const handlePageChange = (page) => {
-    setPage(page);
-  };
-  useEffect(() => {
-    getNewsList();
-  }, [page]);
+
   return (
     <div className="news-list-container">
       <Title level={5} className="title">
         {t("NewsList.Title")}
       </Title>
       <div className="news-list">
-        {isLoading ? (
+        {isLocalLoading ? (
           <>
             <Skeleton />
             <Skeleton />
@@ -65,7 +64,7 @@ function NewsList() {
             <Pagination
               defaultCurrent={1}
               total={50}
-              onChange={handlePageChange}
+              onChange={(page) => setPage(page)}
               className="news-list__pagination"
             />
           </>

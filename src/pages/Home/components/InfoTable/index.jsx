@@ -57,20 +57,12 @@ function InfoTable({ countries }) {
     };
   });
 
-  const onChange = (pagination, filters, sorter, extra) => {
-    // console.log("params", pagination, filters, sorter, extra);
-  };
   return (
     <div className="home__info-table">
       <Title level={5} className="title">
         {t("Home.InfoTable.Title")}
       </Title>
-      <Table
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
-        className="table"
-      />
+      <Table columns={columns} dataSource={data} className="table" />
     </div>
   );
 }

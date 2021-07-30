@@ -10,6 +10,14 @@ import InputField from "../InputField";
 function Login(props) {
   const { isLoginVisible, toggleLogin } = props;
   const [userList, setUserList] = useState([]);
+  const initialValues = {
+    username: "",
+    password: "",
+  };
+
+  useEffect(() => {
+    getUserList();
+  }, []);
 
   const getUserList = () => {
     axios("https://corona--tracker.herokuapp.com/userlist")
@@ -60,14 +68,6 @@ function Login(props) {
       message: "Login successfully",
     });
   };
-  const initialValues = {
-    username: "",
-    password: "",
-  };
-
-  useEffect(() => {
-    getUserList();
-  }, []);
 
   return (
     <Modal closable={false} visible={isLoginVisible} footer={null}>

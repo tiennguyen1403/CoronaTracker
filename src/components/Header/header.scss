@@ -60,13 +60,19 @@
                     transform: translateX(-15%);
 
                     &:hover{
-                        a:after{
+                        a:after,
+                        .login-btn:after,
+                        .register-btn:after,
+                        .logout-btn:after{
                             width: 100%;
                             left: 0;
                         }
                     }
 
-                    a,button{
+                    a,
+                    .login-btn,
+                    .register-btn,
+                    .logout-btn{
                         text-decoration: none;
                         color: #108885;
                         font-weight: bold;
@@ -151,13 +157,19 @@
                     transform: translateX(-15%);
 
                     &:hover{
-                        a:after{
+                        a:after,
+                        .login-btn:after,
+                        .register-btn:after,
+                        .logout-btn:after{
                             width: 100%;
                             left: 0;
                         }
                     }
 
-                    a,button{
+                    a,button,
+                    .login-btn,
+                    .register-btn,
+                    .logout-btn{
                         text-decoration: none;
                         color: #b0b3b8;
                         font-weight: bold;
@@ -173,6 +185,9 @@
                             bottom: 0;
                             background-color: #b0b3b8;
                         }
+                    }
+                    button.ant-switch.ant-switch-checked{
+                        background-color: #324680;
                     }
                 }
             }

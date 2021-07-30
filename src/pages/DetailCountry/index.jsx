@@ -15,7 +15,6 @@ import { GlobalActions } from "../../redux/rootAction";
 function DetailCountry({ history }) {
   const dispatch = useDispatch();
   const { countrycode } = useParams();
-  const [isLocalLoading, setIsLocalLoading] = useState(true);
   const [detailHistory, setDetailHistory] = useState({});
   const countries = useSelector((state) => state.GlobalReducer.countries);
   const detailCountry = useSelector(
@@ -23,10 +22,17 @@ function DetailCountry({ history }) {
   );
   const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
 
+  useEffect(() => {
+    getCountries();
+    getDetailCountry();
+    getDetailHistory();
+  }, [countrycode]);
+
   const getCountries = () => {
     axios("https://disease.sh/v3/covid-19/countries")
       .then((res) => {
         dispatch(GlobalActions.setCountries(res.data));
+        dispatch(GlobalActions.setIsLoading(false));
       })
       .catch((err) => console.log(err.response));
   };
@@ -34,6 +40,7 @@ function DetailCountry({ history }) {
     axios(`https://disease.sh/v3/covid-19/countries/${countrycode}`)
       .then((res) => {
         dispatch(GlobalActions.setDetailCountry(res.data));
+        dispatch(GlobalActions.setIsLoading(false));
       })
       .catch((err) => console.log(err.response));
   };
@@ -43,42 +50,22 @@ function DetailCountry({ history }) {
     )
       .then((res) => {
         setDetailHistory(res.data.timeline);
-        setIsLocalLoading(false);
         dispatch(GlobalActions.setIsLoading(false));
       })
       .catch((err) => console.log(err.response));
   };
-  const fetchData = async () => {
-    try {
-      await getCountries();
-      await getDetailCountry();
-      await getDetailHistory();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, [countrycode]);
+
   return (
-    <>
-      {isLocalLoading ? (
-        <div></div>
-      ) : (
-        <div
-          className={darkMode ? "dark-detail-container" : "detail-container"}
-        >
-          <div className="detail">
-            <CountrySelector countries={countries} history={history} />
-            <InfoCard detailCountry={detailCountry} />
-            <RateCard detailCountry={detailCountry} />
-            <BarChart detailHistory={detailHistory} />
-            <LineChart detailHistory={detailHistory} />
-            <NewsList />
-          </div>
-        </div>
-      )}
-    </>
+    <div className={darkMode ? "dark-detail-container" : "detail-container"}>
+      <div className="detail">
+        <CountrySelector countries={countries} history={history} />
+        <InfoCard detailCountry={detailCountry} />
+        <RateCard detailCountry={detailCountry} />
+        <BarChart detailHistory={detailHistory} />
+        <LineChart detailHistory={detailHistory} />
+        <NewsList />
+      </div>
+    </div>
   );
 }
 

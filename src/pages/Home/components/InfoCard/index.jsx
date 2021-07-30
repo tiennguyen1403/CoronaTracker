@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Typography, Card } from "antd";
+import { Typography, Card, Spin } from "antd";
 import { Link } from "react-router-dom";
 
 import CountrySelector from "../../../../components/CountrySelector";
@@ -10,6 +10,11 @@ const { Title, Text } = Typography;
 function InfoCard({ totalInfo, countries, history }) {
   const { t } = useTranslation();
   const { cases, recovered, deaths } = totalInfo;
+  const [isLocalLoading, setIsLocalLoading] = useState(true);
+
+  useEffect(() => {
+    if (totalInfo) setIsLocalLoading(false);
+  }, []);
 
   return (
     <div className="home__info-card">
@@ -20,36 +25,24 @@ function InfoCard({ totalInfo, countries, history }) {
       <div className="card-group">
         <Card
           size="small"
-          title={
-            <Text className="infected-card__title">
-              {t("Home.InfoCard.Confirmed")}
-            </Text>
-          }
+          title={<Text>{t("Home.InfoCard.Confirmed")}</Text>}
           className="infected-card"
         >
-          <p>{formatNumber(cases)}</p>
+          {isLocalLoading ? <Spin /> : <p>{formatNumber(cases)}</p>}
         </Card>
         <Card
           size="small"
-          title={
-            <Text className="recovered-card__title">
-              {t("Home.InfoCard.Recovered")}
-            </Text>
-          }
+          title={<Text>{t("Home.InfoCard.Recovered")}</Text>}
           className="recovered-card"
         >
-          <p>{formatNumber(recovered)}</p>
+          {isLocalLoading ? <Spin /> : <p>{formatNumber(recovered)}</p>}
         </Card>
         <Card
           size="small"
-          title={
-            <Text className="deaths-card__title">
-              {t("Home.InfoCard.Deaths")}
-            </Text>
-          }
+          title={<Text>{t("Home.InfoCard.Deaths")}</Text>}
           className="deaths-card"
         >
-          <p>{formatNumber(deaths)}</p>
+          {isLocalLoading ? <Spin /> : <p>{formatNumber(deaths)}</p>}
         </Card>
       </div>
       <Link to="/analytics">{t("Home.InfoCard.Detail")}</Link>

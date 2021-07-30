@@ -1,5 +1,5 @@
-import "./register.scss";
 import React, { useState, useEffect } from "react";
+import "./register.scss";
 import axios from "axios";
 import { Formik, Form, FastField } from "formik";
 import * as Yup from "yup";
@@ -10,6 +10,16 @@ import InputField from "../InputField";
 function Register(props) {
   const { isRegisterVisible, toggleRegister } = props;
   const [userList, setUserList] = useState([]);
+  const initialValues = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+
+  useEffect(() => {
+    getUserList();
+  }, []);
 
   const getUserList = () => {
     axios("https://corona--tracker.herokuapp.com/userlist")
@@ -37,37 +47,27 @@ function Register(props) {
   });
   const handleUserSubmit = (values, { resetForm }) => {
     axios
-      .post("http://localhost:8000/userlist", {
+      .post("https://corona--tracker.herokuapp.com/userlist", {
         id: userList.length + 1,
         username: values.username,
         password: values.password,
         email: values.email,
       })
       .then((res) => {
-        getUserList();
+        getUserList(); //call API to refresh userList
         resetForm();
         openSuccessNotification();
       })
       .catch((err) => {
         console.log(err.response);
       });
-    // axios.delete("http://localhost:8000/userlist/7");
   };
   const openSuccessNotification = () => {
     notification["success"]({
       message: "Register successfully",
     });
   };
-  const initialValues = {
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  };
 
-  useEffect(() => {
-    getUserList();
-  }, []);
   return (
     <Modal closable={false} visible={isRegisterVisible} footer={null}>
       <div className="register">

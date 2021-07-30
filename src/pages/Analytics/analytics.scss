@@ -26,10 +26,13 @@
                         line-height: 40px;
                         font-size: 15.7px;
                     }
+                    div.ant-spin.ant-spin-spinning{
+                        transform: translateY(50%);
+                    }
                 }
                 .infected-card{
                     background: #fff5f5;
-                    &__title{
+                    span.ant-typography{
                         color: #e53e3e;
                     }
                     div.ant-card-head{
@@ -38,10 +41,13 @@
                     p{
                         color: #e53e3e;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #e53e3e;
+                    }
                 }
                 .recovered-card{
                     background: #f0fff4;
-                    &__title{
+                    span.ant-typography{
                         color: #38a169;
                     }
                     div.ant-card-head{
@@ -50,10 +56,13 @@
                     p{
                         color: #38a169;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #38a169;
+                    }
                 }
                 .deaths-card{
                     background: #edf2f7;
-                    &__title{
+                    span.ant-typography{
                         color: #718096;
                     }
                     div.ant-card-head{
@@ -61,6 +70,9 @@
                     }
                     p{
                         color: #718096;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #718096;
                     }
                 }
             }
@@ -83,6 +95,7 @@
         }
         &__line-chart{
             margin-top: 15px;
+            min-height: 500px;
         }
         &__bar-chart{
             margin-top: 15px;
@@ -128,10 +141,13 @@
                         line-height: 40px;
                         font-size: 15.7px;
                     }
+                    div.ant-spin.ant-spin-spinning{
+                        transform: translateY(50%);
+                    }
                 }
                 .infected-card{
                     background: #fff5f5;
-                    &__title{
+                    span.ant-typography{
                         color: #e53e3e;
                     }
                     div.ant-card-head{
@@ -140,10 +156,13 @@
                     p{
                         color: #e53e3e;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #e53e3e;
+                    }
                 }
                 .recovered-card{
                     background: #f0fff4;
-                    &__title{
+                    span.ant-typography{
                         color: #38a169;
                     }
                     div.ant-card-head{
@@ -152,10 +171,13 @@
                     p{
                         color: #38a169;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #38a169;
+                    }
                 }
                 .deaths-card{
                     background: #edf2f7;
-                    &__title{
+                    span.ant-typography{
                         color: #718096;
                     }
                     div.ant-card-head{
@@ -163,6 +185,9 @@
                     }
                     p{
                         color: #718096;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #718096;
                     }
                 }
             }

@@ -53,17 +53,9 @@ function InfoTable({ countries }) {
     recovered: country.recovered,
     deaths: country.deaths,
   }));
-  const onChange = (pagination, filters, sorter, extra) => {
-    // console.log("params", pagination, filters, sorter, extra);
-  };
   return (
     <div className="analytics__info-table">
-      <Table
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
-        className="table"
-      />
+      <Table columns={columns} dataSource={data} className="table" />
     </div>
   );
 }

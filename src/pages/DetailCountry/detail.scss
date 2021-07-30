@@ -48,12 +48,14 @@
                         line-height: 15px;
                         font-size: 11px;
                     }
+                    div.ant-spin.ant-spin-spinning{
+                        transform: translateY(50%);
+                    }
                 }
                 .infected-card{
                     background: #fff5f5;
-                    &__title{
+                    span.ant-typography{
                         color: #e53e3e;
-                        font-weight: bold;
                     }
                     div.ant-card-head{
                         background: #fed7d7;
@@ -61,12 +63,14 @@
                     p{
                         color: #e53e3e;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #e53e3e;
+                    }
                 }
                 .recovered-card{
                     background: #f0fff4;
-                    &__title{
+                    span.ant-typography{
                         color: #38a169;
-                        font-weight: bold;
                     }
                     div.ant-card-head{
                         background: #c6f6d5;
@@ -74,18 +78,24 @@
                     p{
                         color: #38a169;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #38a169;
+                    }
                 }
                 .deaths-card{
                     background: #edf2f7;
-                    &__title{
+                    span.ant-typography{
                         color: #718096;
-                        font-weight: bold;
                     }
                     div.ant-card-head{
                         background: #e2e8f0;
                     }
                     p{
                         color: #718096;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #718096;
+                        line-height: 50px;
                     }
                 }
             }
@@ -201,12 +211,14 @@
                         line-height: 15px;
                         font-size: 11px;
                     }
+                    div.ant-spin.ant-spin-spinning{
+                        transform: translateY(50%);
+                    }
                 }
                 .infected-card{
                     background: #fff5f5;
-                    &__title{
+                    span.ant-typography{
                         color: #e53e3e;
-                        font-weight: bold;
                     }
                     div.ant-card-head{
                         background: #fed7d7;
@@ -214,12 +226,14 @@
                     p{
                         color: #e53e3e;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #e53e3e;
+                    }
                 }
                 .recovered-card{
                     background: #f0fff4;
-                    &__title{
+                    span.ant-typography{
                         color: #38a169;
-                        font-weight: bold;
                     }
                     div.ant-card-head{
                         background: #c6f6d5;
@@ -227,18 +241,24 @@
                     p{
                         color: #38a169;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #38a169;
+                    }
                 }
                 .deaths-card{
                     background: #edf2f7;
-                    &__title{
+                    span.ant-typography{
                         color: #718096;
-                        font-weight: bold;
                     }
                     div.ant-card-head{
                         background: #e2e8f0;
                     }
                     p{
                         color: #718096;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #718096;
+                        line-height: 50px;
                     }
                 }
             }

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { MenuOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Switch, notification } from "antd";
 import { RiSunFill, RiMoonFill } from "react-icons/ri";
@@ -14,11 +14,17 @@ import { GlobalActions } from "../../redux/rootAction";
 
 function Header() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { t } = useTranslation();
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
+  const [isUserLogin, setIsUserLogin] = useState(isLoggedIn);
   const [isLoginVisible, setIsLoginVisible] = useState(false);
   const [isRegisterVisible, setIsRegisterVisible] = useState(false);
   const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
+
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isUserLogin);
+  }, [isUserLogin]);
 
   const toggleLogin = () => {
     setIsLoginVisible(!isLoginVisible);
@@ -27,18 +33,27 @@ function Header() {
     setIsRegisterVisible(!isRegisterVisible);
   };
   const handleLogout = () => {
-    localStorage.setItem("isLoggedIn", false);
+    history.push("/news");
+    setIsUserLogin(false);
     openLogoutNotification();
+  };
+  const handleLoginSuccess = () => {
+    setIsUserLogin(true);
+    history.push("/");
   };
   const openLogoutNotification = () => {
     notification["success"]({
-      message: "You are logged out!",
+      message: "You are logged out",
     });
   };
 
   return (
     <div className={darkMode ? "dark-header-container" : "header-container"}>
-      <Login isLoginVisible={isLoginVisible} toggleLogin={toggleLogin} />
+      <Login
+        isLoginVisible={isLoginVisible}
+        toggleLogin={toggleLogin}
+        onLoginSuccess={handleLoginSuccess}
+      />
       <Register
         isRegisterVisible={isRegisterVisible}
         toggleRegister={toggleRegister}
@@ -67,7 +82,7 @@ function Header() {
             <li>
               <Link to="/news">{t("Header.News")}</Link>
             </li>
-            {isLoggedIn ? (
+            {isUserLogin ? (
               <li>
                 <span className="logout-btn" onClick={handleLogout}>
                   {t("Header.Logout")}

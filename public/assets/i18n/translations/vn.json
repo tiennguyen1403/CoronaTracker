@@ -25,9 +25,11 @@
     "Analytics.InfoTable.Recovered": "Hồi phục",
     "Analytics.InfoTable.Deaths": "Tử vong",
     "Detail.InfoCard.Title": "Tổng quan",
+    "Detail.InfoCard.Population": "Dân số",
     "Detail.InfoCard.Confirmed": "Nhiễm bệnh",
     "Detail.InfoCard.Recovered": "Hồi phục",
     "Detail.InfoCard.Deaths": "Tử vong",
+    "Detail.InfoCard.NewCases": "ca mới",
     "Detail.RateCard.FatalityRate": "Tỉ lệ tử vong",
     "Detail.RateCard.RecoveryRate": "Tỉ lệ hồi phục",
     "Detail.RateCard.Unit": "Trên 1 triệu người"

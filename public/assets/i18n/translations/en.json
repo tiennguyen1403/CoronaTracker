@@ -25,9 +25,11 @@
     "Analytics.InfoTable.Recovered": "Recovered",
     "Analytics.InfoTable.Deaths": "Deaths",
     "Detail.InfoCard.Title": "Overview",
+    "Detail.InfoCard.Population": "Population",
     "Detail.InfoCard.Confirmed": "Confirmed",
     "Detail.InfoCard.Recovered": "Recovered",
     "Detail.InfoCard.Deaths": "Deaths",
+    "Detail.InfoCard.NewCases": "new cases",
     "Detail.RateCard.FatalityRate": "Fatality Rate",
     "Detail.RateCard.RecoveryRate": "Recovery Rate",
     "Detail.RateCard.Unit": "Per One Million"

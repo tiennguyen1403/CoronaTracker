@@ -8,7 +8,7 @@ import { Modal, notification } from "antd";
 import InputField from "../InputField";
 
 function Login(props) {
-  const { isLoginVisible, toggleLogin } = props;
+  const { isLoginVisible, toggleLogin, onLoginSuccess } = props;
   const [userList, setUserList] = useState([]);
   const initialValues = {
     username: "",
@@ -41,7 +41,7 @@ function Login(props) {
   const handleUserSubmit = (values, { resetForm }) => {
     if (userList.length === 0) {
       if (values.username === "admin" && values.password === "admin") {
-        localStorage.setItem("isLoggedIn", true);
+        onLoginSuccess();
         resetForm();
         openSuccessNotification();
         toggleLogin();
@@ -53,7 +53,7 @@ function Login(props) {
         values.username === userItem.username &&
         values.password === userItem.password
       ) {
-        localStorage.setItem("isLoggedIn", true);
+        onLoginSuccess();
         resetForm();
         openSuccessNotification();
         toggleLogin();

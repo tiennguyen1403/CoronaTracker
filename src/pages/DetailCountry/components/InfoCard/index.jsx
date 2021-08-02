@@ -17,6 +17,7 @@ function InfoCard({ detailCountry }) {
     todayDeaths,
     country,
     countryInfo,
+    population,
   } = detailCountry;
   useEffect(() => {
     if (detailCountry) setIsLocalLoading(false);
@@ -28,6 +29,10 @@ function InfoCard({ detailCountry }) {
         <img src={countryInfo?.flag} alt="flag" />
         <span>{country + " " + t("Detail.InfoCard.Title")}</span>
       </div>
+      <p className="population">
+        {t("Detail.InfoCard.Population")}:
+        <span> {formatNumber(population)}</span>
+      </p>
       <div className="card-group">
         <Card
           size="small"
@@ -39,7 +44,9 @@ function InfoCard({ detailCountry }) {
           ) : (
             <>
               <p>{formatNumber(cases)}</p>
-              <p>+{formatNumber(todayCases)} new cases</p>
+              <p>
+                +{formatNumber(todayCases)} {t("Detail.InfoCard.NewCases")}
+              </p>
             </>
           )}
         </Card>
@@ -53,7 +60,9 @@ function InfoCard({ detailCountry }) {
           ) : (
             <>
               <p>{formatNumber(recovered)}</p>
-              <p>+{formatNumber(todayRecovered)} new cases</p>
+              <p>
+                +{formatNumber(todayRecovered)} {t("Detail.InfoCard.NewCases")}
+              </p>
             </>
           )}
         </Card>
@@ -67,7 +76,9 @@ function InfoCard({ detailCountry }) {
           ) : (
             <>
               <p>{formatNumber(deaths)}</p>
-              <p>+{formatNumber(todayDeaths)} new cases</p>
+              <p>
+                +{formatNumber(todayDeaths)} {t("Detail.InfoCard.NewCases")}
+              </p>
             </>
           )}
         </Card>

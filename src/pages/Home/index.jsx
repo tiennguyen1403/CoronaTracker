@@ -26,7 +26,9 @@ function Home({ history }) {
         dispatch(GlobalActions.setCountries(res.data));
         dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
   const getTotalInfo = () => {
     axios("https://disease.sh/v3/covid-19/all")
@@ -34,7 +36,9 @@ function Home({ history }) {
         dispatch(GlobalActions.setTotalInfo(res.data));
         dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
 
   return (

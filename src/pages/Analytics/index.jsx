@@ -34,7 +34,9 @@ function Analytics() {
         dispatch(GlobalActions.setCountries(res.data));
         dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log("countries: ", err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
   const getTotalInfo = () => {
     axios("https://disease.sh/v3/covid-19/all")
@@ -42,7 +44,9 @@ function Analytics() {
         dispatch(GlobalActions.setTotalInfo(res.data));
         dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
   const getMapData = () => {
     import("@highcharts/map-collection/custom/world.geo.json").then((res) =>
@@ -55,7 +59,9 @@ function Analytics() {
         setHistoryInfo(res.data);
         dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
 
   return (

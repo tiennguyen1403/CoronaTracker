@@ -62,8 +62,14 @@ function BarChart({ countries }) {
   const [topTodayCases, setTopTodayCases] = useState([]);
   const [options, setOptions] = useState({});
 
+  useEffect(() => {
+    filterTopTodayCases();
+  }, []);
+  useEffect(() => {
+    setOptions(generateOptions(topTodayCases));
+  }, [topTodayCases]);
+
   const filterTopTodayCases = () => {
-    if (!countries) return null;
     let topTodayCases = countries
       .slice()
       .sort((country1, country2) => country1.todayCases - country2.todayCases);
@@ -71,13 +77,6 @@ function BarChart({ countries }) {
     topTodayCases = topTodayCases.filter((country, index) => index < 10);
     setTopTodayCases(topTodayCases);
   };
-
-  useEffect(() => {
-    filterTopTodayCases();
-  }, []);
-  useEffect(() => {
-    setOptions(generateOptions(topTodayCases));
-  }, [topTodayCases]);
 
   return (
     <div className="analytics__bar-chart">

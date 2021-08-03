@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import "./detail.scss";
-import Wrapper from "../../HOCs/Wrapper";
 import CountrySelector from "../../components/CountrySelector";
 import InfoCard from "./components/InfoCard";
 import RateCard from "./components/RateCard";
@@ -16,26 +15,38 @@ import { GlobalActions } from "../../redux/rootAction";
 function DetailCountry({ history }) {
   const dispatch = useDispatch();
   const { countrycode } = useParams();
-  const [isLocalLoading, setIsLocalLoading] = useState(true);
   const [detailHistory, setDetailHistory] = useState({});
   const countries = useSelector((state) => state.GlobalReducer.countries);
   const detailCountry = useSelector(
     (state) => state.GlobalReducer.detailCountry
   );
+  const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
+
+  useEffect(() => {
+    getCountries();
+    getDetailCountry();
+    getDetailHistory();
+  }, [countrycode]);
 
   const getCountries = () => {
     axios("https://disease.sh/v3/covid-19/countries")
       .then((res) => {
         dispatch(GlobalActions.setCountries(res.data));
+        dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
   const getDetailCountry = () => {
     axios(`https://disease.sh/v3/covid-19/countries/${countrycode}`)
       .then((res) => {
         dispatch(GlobalActions.setDetailCountry(res.data));
+        dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
   const getDetailHistory = () => {
     axios(
@@ -43,41 +54,25 @@ function DetailCountry({ history }) {
     )
       .then((res) => {
         setDetailHistory(res.data.timeline);
-        setIsLocalLoading(false);
         dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
-  const fetchData = async () => {
-    try {
-      await getCountries();
-      await getDetailCountry();
-      await getDetailHistory();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, [countrycode]);
+
   return (
-    <>
-      {isLocalLoading ? (
-        <div></div>
-      ) : (
-        <div className="detail-container">
-          <div className="detail">
-            <CountrySelector countries={countries} history={history} />
-            <InfoCard detailCountry={detailCountry} />
-            <RateCard detailCountry={detailCountry} />
-            <BarChart detailHistory={detailHistory} />
-            <LineChart detailHistory={detailHistory} />
-            <NewsList />
-          </div>
-        </div>
-      )}
-    </>
+    <div className={darkMode ? "dark-detail-container" : "detail-container"}>
+      <div className="detail">
+        <CountrySelector countries={countries} history={history} />
+        <InfoCard detailCountry={detailCountry} />
+        <RateCard detailCountry={detailCountry} />
+        <BarChart detailHistory={detailHistory} />
+        <LineChart detailHistory={detailHistory} />
+        <NewsList />
+      </div>
+    </div>
   );
 }
 
-export default Wrapper(DetailCountry);
+export default DetailCountry;

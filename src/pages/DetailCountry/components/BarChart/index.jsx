@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highchart from "highcharts";
+import _ from "lodash";
 
 const generateOptions = (detailHistory) => {
-  const categories = Object.keys(detailHistory.cases)
+  const categories = _.keys(detailHistory.cases)
     .reverse()
     .slice(0, 14)
     .reverse();
-  const casesHistory = Object.values(detailHistory.cases)
+  const casesHistory = _.values(detailHistory.cases)
     .reverse()
     .slice(0, 14)
     .reverse();
-  const recoveredHistory = Object.values(detailHistory.recovered)
+  const recoveredHistory = _.values(detailHistory.recovered)
     .reverse()
     .slice(0, 14)
     .reverse();
-  const deathsHistory = Object.values(detailHistory.deaths)
+  const deathsHistory = _.values(detailHistory.deaths)
     .reverse()
     .slice(0, 14)
     .reverse();

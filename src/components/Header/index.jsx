@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { MenuOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import { Switch } from "antd";
-import { FiSun, FiMoon } from "react-icons/fi";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Switch, notification } from "antd";
+import { RiSunFill, RiMoonFill } from "react-icons/ri";
+import axios from "axios";
 
 import "./header.scss";
 import Login from "../Login";
@@ -13,12 +14,30 @@ import LanguageSelector from "../LanguageSelector";
 import { GlobalActions } from "../../redux/rootAction";
 
 function Header() {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { t } = useTranslation();
   const isLoggedIn = JSON.parse(localStorage.getItem("isLoggedIn"));
+  const [isUserLogin, setIsUserLogin] = useState(isLoggedIn);
+  const [userList, setUserList] = useState([]);
   const [isLoginVisible, setIsLoginVisible] = useState(false);
   const [isRegisterVisible, setIsRegisterVisible] = useState(false);
+  const darkMode = useSelector((state) => state.GlobalReducer.darkMode);
 
+  useEffect(() => {
+    localStorage.setItem("isLoggedIn", isUserLogin);
+  }, [isUserLogin]);
+  useEffect(() => {
+    getUserList();
+  }, []);
+
+  const getUserList = () => {
+    axios("https://corona--tracker.herokuapp.com/userlist")
+      .then((res) => {
+        setUserList(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
   const toggleLogin = () => {
     setIsLoginVisible(!isLoginVisible);
   };
@@ -26,15 +45,42 @@ function Header() {
     setIsRegisterVisible(!isRegisterVisible);
   };
   const handleLogout = () => {
-    localStorage.setItem("isLoggedIn", false);
+    history.push("/news");
+    setIsUserLogin(false);
+    openLogoutNotification();
+  };
+  const handleLoginSuccess = () => {
+    setIsUserLogin(true);
+    history.push("/");
+  };
+  const handleRegisterSuccess = () => {
+    getUserList();
+    openRegisterNotification();
+  };
+  const openLogoutNotification = () => {
+    notification["success"]({
+      message: "You are logged out",
+    });
+  };
+  const openRegisterNotification = () => {
+    notification["success"]({
+      message: "Register Successfully",
+    });
   };
 
   return (
-    <div className="header-container">
-      <Login isLoginVisible={isLoginVisible} toggleLogin={toggleLogin} />
+    <div className={darkMode ? "dark-header-container" : "header-container"}>
+      <Login
+        userList={userList}
+        isLoginVisible={isLoginVisible}
+        toggleLogin={toggleLogin}
+        onLoginSuccess={handleLoginSuccess}
+      />
       <Register
+        userList={userList}
         isRegisterVisible={isRegisterVisible}
         toggleRegister={toggleRegister}
+        onRegisterSuccess={handleRegisterSuccess}
       />
       <header className="header">
         <div className="header__logo">
@@ -57,42 +103,41 @@ function Header() {
             <li>
               <Link to="/analytics">{t("Header.Analytics")}</Link>
             </li>
-            {isLoggedIn ? (
+            <li>
+              <Link to="/news">{t("Header.News")}</Link>
+            </li>
+            {isUserLogin ? (
               <li>
-                <a href="#a" onClick={handleLogout}>
+                <span className="logout-btn" onClick={handleLogout}>
                   {t("Header.Logout")}
-                </a>
+                </span>
               </li>
             ) : (
               <>
                 <li>
-                  <a href="#a" onClick={toggleLogin}>
+                  <span className="login-btn" onClick={toggleLogin}>
                     {t("Header.Login")}
-                  </a>
+                  </span>
                 </li>
                 <li>
-                  <a href="#a" onClick={toggleRegister}>
+                  <span className="register-btn" onClick={toggleRegister}>
                     {t("Header.Register")}
-                  </a>
+                  </span>
                 </li>
               </>
             )}
-            <li>
-              <Link to="/news">{t("Header.News")}</Link>
-            </li>
-            <li>
-              <a href="#a">{t("Header.About")}</a>
-            </li>
             <li>
               <LanguageSelector />
             </li>
             <li>
               <Switch
                 checkedChildren={
-                  <FiMoon style={{ transform: "translateY(10%)" }} />
+                  <RiMoonFill
+                    style={{ transform: "translateY(10%)", color: "#f0c420" }}
+                  />
                 }
                 unCheckedChildren={
-                  <FiSun style={{ transform: "translateY(10%)" }} />
+                  <RiSunFill style={{ transform: "translateY(10%)" }} />
                 }
                 onChange={() => dispatch(GlobalActions.toggleDarkMode())}
               />

@@ -3,6 +3,7 @@
     padding: 0 10px;
     border-bottom: 1px solid#cbd5e0;
     background: #fff;
+    transition: all .4s;
 
     .header{
         min-height: 70px;
@@ -59,13 +60,19 @@
                     transform: translateX(-15%);
 
                     &:hover{
-                        a:after{
+                        a:after,
+                        .login-btn:after,
+                        .register-btn:after,
+                        .logout-btn:after{
                             width: 100%;
                             left: 0;
                         }
                     }
 
-                    a,button{
+                    a,
+                    .login-btn,
+                    .register-btn,
+                    .logout-btn{
                         text-decoration: none;
                         color: #108885;
                         font-weight: bold;
@@ -81,6 +88,106 @@
                             bottom: 0;
                             background-color: #108885;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.dark-header-container{
+    width: 100%;
+    padding: 0 10px;
+    border-bottom: 1px solid white;
+    background: #18191a;
+    transition: all .4s;
+
+    .header{
+        min-height: 70px;
+
+        &__logo{
+            display: flex;
+            align-items: center;
+            float: left;
+
+            img{
+                width: 50px;
+                margin-right: 10px;
+            }
+            & > a{
+                font-weight: bold;
+                font-size: 25px;
+                text-decoration: none;
+                line-height: 70px;
+                color: white;
+                span{
+                    color: #e53e3e;
+                }
+            }
+        }
+        .menuBtn{
+            border: 1px solid white;
+            padding: 3px 7px;
+            border-radius: 5px;
+            float: right;
+            color: white;
+            transform: translateY(75%);
+        }
+        #menuBtn{
+            display: none;
+            position: absolute;
+            visibility: hidden;
+            z-index: -5;
+        }
+        #menuBtn:checked ~ .menu{
+            display: block;
+        }
+        .menu{
+            clear: both;
+            display: none;
+            ul{
+                list-style-type: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                li{
+                    position: relative;
+                    cursor: pointer;
+                    padding: 10px 15px;
+                    transform: translateX(-15%);
+
+                    &:hover{
+                        a:after,
+                        .login-btn:after,
+                        .register-btn:after,
+                        .logout-btn:after{
+                            width: 100%;
+                            left: 0;
+                        }
+                    }
+
+                    a,button,
+                    .login-btn,
+                    .register-btn,
+                    .logout-btn{
+                        text-decoration: none;
+                        color: #b0b3b8;
+                        font-weight: bold;
+                        font-size: 17px;
+                        &:after{
+                            transition: all .3s ease;
+                            content: "";
+                            width: 0;
+                            height: 4px;
+                            position: absolute;
+                            left: 50%;
+                            right: 0;
+                            bottom: 0;
+                            background-color: #b0b3b8;
+                        }
+                    }
+                    button.ant-switch.ant-switch-checked{
+                        background-color: #324680;
                     }
                 }
             }
@@ -107,10 +214,54 @@
             }
         }
     }
+    .dark-header-container{
+        .header{
+            &__logo{
+                & > a{
+                    font-size: 29px;
+                }
+            }
+            .menu{
+                ul{
+                    li{
+                        a{
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 1024px){
     .header-container{
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .menuBtn{
+                display: none;
+            }
+            .logo{
+                clear: both;
+            }
+            .menu{
+                display: block;
+                ul{
+                    flex-direction: row;
+                    li{
+                        padding: 10px 15px;
+                        transform: translateY(15%);
+                        a{
+                            font-size: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .dark-header-container{
         .header{
             display: flex;
             justify-content: space-between;

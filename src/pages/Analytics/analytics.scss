@@ -1,13 +1,12 @@
 .analytics-container{
     width: 100%;
     background: #fff;
-    padding: 0 10px;
+    padding: 10px;
+    transition: all .4s ease;
     .analytics{
         & > h1{
             font-size: 20px;
             font-weight: bold;
-            margin-bottom: 0;
-            margin: 10px 0;
         }
         &__info-card{
             border-radius: 5px;
@@ -27,10 +26,13 @@
                         line-height: 40px;
                         font-size: 15.7px;
                     }
+                    div.ant-spin.ant-spin-spinning{
+                        transform: translateY(50%);
+                    }
                 }
                 .infected-card{
                     background: #fff5f5;
-                    &__title{
+                    span.ant-typography{
                         color: #e53e3e;
                     }
                     div.ant-card-head{
@@ -39,10 +41,13 @@
                     p{
                         color: #e53e3e;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #e53e3e;
+                    }
                 }
                 .recovered-card{
                     background: #f0fff4;
-                    &__title{
+                    span.ant-typography{
                         color: #38a169;
                     }
                     div.ant-card-head{
@@ -51,10 +56,13 @@
                     p{
                         color: #38a169;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #38a169;
+                    }
                 }
                 .deaths-card{
                     background: #edf2f7;
-                    &__title{
+                    span.ant-typography{
                         color: #718096;
                     }
                     div.ant-card-head{
@@ -62,6 +70,9 @@
                     }
                     p{
                         color: #718096;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #718096;
                     }
                 }
             }
@@ -71,6 +82,159 @@
             .table{
                 width: 100%;
                 overflow-x: scroll;
+                div.ant-select-selector{
+                    display: none;
+                }
+                .ant-table-pagination-right{
+                    justify-content: center;
+                }
+                li.ant-pagination-options{
+                    display: none;
+                }
+            }
+        }
+        &__line-chart{
+            margin-top: 15px;
+            min-height: 500px;
+        }
+        &__bar-chart{
+            margin-top: 15px;
+        }
+        &__map{
+            margin-top: 15px;
+        }
+
+        &__info-table,
+        &__line-chart,
+        &__bar-chart,
+        &__map{
+            border: 1px solid #cbd5e0;
+        }
+    }
+}
+.dark-analytics-container{
+    width: 100%;
+    background: #121212;
+    padding: 10px;
+    transition: all .4s ease;
+    .analytics{
+        & > h1{
+            font-size: 20px;
+            font-weight: bold;
+            color: #b0b3b8;
+        }
+        &__info-card{
+            border-radius: 5px;
+            .card-group{
+                display: flex;
+                justify-content: space-between;
+                .infected-card,
+                .recovered-card,
+                .deaths-card{
+                    width: 32%;
+                    border-radius: 5px;
+                    text-align: center;
+                    font-weight: bold;
+                    height: 110px;
+                    p{
+                        margin-bottom: 0;
+                        line-height: 40px;
+                        font-size: 15.7px;
+                    }
+                    div.ant-spin.ant-spin-spinning{
+                        transform: translateY(50%);
+                    }
+                }
+                .infected-card{
+                    background: #fff5f5;
+                    span.ant-typography{
+                        color: #e53e3e;
+                    }
+                    div.ant-card-head{
+                        background: #fed7d7;
+                    }
+                    p{
+                        color: #e53e3e;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #e53e3e;
+                    }
+                }
+                .recovered-card{
+                    background: #f0fff4;
+                    span.ant-typography{
+                        color: #38a169;
+                    }
+                    div.ant-card-head{
+                        background: #c6f6d5;
+                    }
+                    p{
+                        color: #38a169;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #38a169;
+                    }
+                }
+                .deaths-card{
+                    background: #edf2f7;
+                    span.ant-typography{
+                        color: #718096;
+                    }
+                    div.ant-card-head{
+                        background: #e2e8f0;
+                    }
+                    p{
+                        color: #718096;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #718096;
+                    }
+                }
+            }
+        }
+        &__info-table{
+            margin-top: 15px;
+            .table{
+                width: 100%;
+                overflow-x: scroll;
+                div.ant-table{
+                    background: #121212;
+                    color: #b0b3b8;
+                }
+                th.ant-table-cell.ant-table-cell{
+                    background: #121212;
+                    color: #b0b3b8;
+                }
+                td.ant-table-cell.ant-table-cell{
+                    background: #121212;
+                    color: #b0b3b8;
+                }
+                .ant-pagination-item-link{
+                    border-color: white;
+                    background: none;
+                    color: white;
+                }
+                li.ant-pagination-item.ant-pagination-item-active{
+                    a{
+                        color: #1890ff;
+                    }
+                }
+                li.ant-pagination-item{
+                    border-color: white;
+                    background: none;
+                    a{
+                        color: white;
+                    }
+                }
+                div.ant-select-selector{
+                    display: none;
+                }
+                .ant-table-pagination-right{
+                    justify-content: center;
+                }
+                li.ant-pagination-options{
+                    display: none;
+                }
             }
         }
         &__line-chart{
@@ -94,7 +258,26 @@
 
 @media screen and (min-width: 576px){
     .analytics-container{
-        padding: 0 20px;
+        padding: 10px 20px;
+        .analytics{
+            &__info-card{
+                .card-group{
+                    .infected-card,
+                    .recovered-card,
+                    .deaths-card{
+                        &__title{
+                            font-size: 15px;
+                        }
+                        p{
+                            font-size: 23px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .dark-analytics-container{
+        padding: 10px 20px;
         .analytics{
             &__info-card{
                 .card-group{
@@ -116,6 +299,7 @@
 
 @media screen and (min-width: 1024px){
     .analytics-container{
+        min-height: 1310px;
         .analytics{
             & > h1{
                 font-size: 24px;
@@ -148,7 +332,38 @@
             }
         }
     }
-    .footer-container{
-        clear: both;
+    .dark-analytics-container{
+        min-height: 1310px;
+        .analytics{
+            & > h1{
+                font-size: 24px;
+            }
+            &__info-card,
+            &__info-table,
+            &__line-chart,
+            &__bar-chart,
+            &__map{
+                width: 49.5%;
+            }
+            &__info-card{
+                float: left;
+            }
+            &__map{
+                float: right;
+                margin: 20px 0;
+            }
+            &__info-table{
+                float: right;
+                margin: 0;
+            }
+            &__line-chart{
+                margin-top: 20px;
+                float: left;
+            }
+            &__bar-chart{
+                margin-top: 20px;
+                float: left;
+            }
+        }
     }
 }

@@ -1,25 +1,22 @@
-import "./register.scss";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
+import "./register.scss";
 import { Formik, Form, FastField } from "formik";
 import * as Yup from "yup";
-import { Modal, notification } from "antd";
+import { Modal } from "antd";
 
 import InputField from "../InputField";
 
 function Register(props) {
-  const { isRegisterVisible, toggleRegister } = props;
-  const [userList, setUserList] = useState([]);
-
-  const getUserList = () => {
-    axios("http://localhost:8000/userlist")
-      .then((res) => {
-        setUserList(res.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+  const { userList, isRegisterVisible, toggleRegister, onRegisterSuccess } =
+    props;
+  const initialValues = {
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   };
+
   const registerSchema = Yup.object().shape({
     username: Yup.string()
       .min(2, "Username is too short!")
@@ -37,37 +34,21 @@ function Register(props) {
   });
   const handleUserSubmit = (values, { resetForm }) => {
     axios
-      .post("http://localhost:8000/userlist", {
+      .post("https://corona--tracker.herokuapp.com/userlist", {
         id: userList.length + 1,
         username: values.username,
         password: values.password,
         email: values.email,
       })
       .then((res) => {
-        getUserList();
+        onRegisterSuccess();
         resetForm();
-        openSuccessNotification();
       })
       .catch((err) => {
         console.log(err.response);
       });
-    // axios.delete("http://localhost:8000/userlist/7");
-  };
-  const openSuccessNotification = () => {
-    notification["success"]({
-      message: "Register successfully",
-    });
-  };
-  const initialValues = {
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
   };
 
-  useEffect(() => {
-    getUserList();
-  }, []);
   return (
     <Modal closable={false} visible={isRegisterVisible} footer={null}>
       <div className="register">

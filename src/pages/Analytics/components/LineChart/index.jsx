@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highchart from "highcharts";
 import moment from "moment";
+import _ from "lodash";
 
 const generateOptions = (data) => {
-  const categories = Object.keys(data.cases).map((item) =>
+  const categories = _.keys(data.cases).map((item) =>
     moment(item).format("DD/MM/YY")
   );
   return {
@@ -56,15 +57,15 @@ const generateOptions = (data) => {
     series: [
       {
         name: "Cases",
-        data: Object.values(data.cases),
+        data: _.values(data.cases),
       },
       {
         name: "Recovered",
-        data: Object.values(data.recovered),
+        data: _.values(data.recovered),
       },
       {
         name: "Deaths",
-        data: Object.values(data.deaths),
+        data: _.values(data.deaths),
       },
     ],
   };
@@ -73,8 +74,9 @@ const generateOptions = (data) => {
 function LineChart({ historyInfo }) {
   const [options, setOptions] = useState({});
   useEffect(() => {
-    setOptions(generateOptions(historyInfo));
+    if (historyInfo) setOptions(generateOptions(historyInfo));
   }, [historyInfo]);
+
   return (
     <div className="analytics__line-chart">
       <HighchartsReact highcharts={Highchart} options={options} />

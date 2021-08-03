@@ -1,5 +1,5 @@
-import { Card, Typography } from "antd";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Card, Typography, Spin } from "antd";
 import { useTranslation } from "react-i18next";
 
 import { formatNumber } from "../../../../helpers";
@@ -7,6 +7,7 @@ const { Text } = Typography;
 
 function InfoCard({ detailCountry }) {
   const { t } = useTranslation();
+  const [isLocalLoading, setIsLocalLoading] = useState(true);
   const {
     cases,
     recovered,
@@ -16,50 +17,70 @@ function InfoCard({ detailCountry }) {
     todayDeaths,
     country,
     countryInfo,
+    population,
   } = detailCountry;
-  const { flag } = countryInfo;
+  useEffect(() => {
+    if (detailCountry) setIsLocalLoading(false);
+  }, []);
+
   return (
     <div className="detail__info-card">
       <div className="detail__info-card__title">
-        <img src={flag} alt="flag" />
+        <img src={countryInfo?.flag} alt="flag" />
         <span>{country + " " + t("Detail.InfoCard.Title")}</span>
       </div>
+      <p className="population">
+        {t("Detail.InfoCard.Population")}:
+        <span> {formatNumber(population)}</span>
+      </p>
       <div className="card-group">
         <Card
           size="small"
-          title={
-            <Text className="infected-card__title">
-              {t("Detail.InfoCard.Confirmed")}
-            </Text>
-          }
+          title={<Text>{t("Detail.InfoCard.Confirmed")}</Text>}
           className="infected-card"
         >
-          <p>{formatNumber(cases)}</p>
-          <p>+{formatNumber(todayCases)} new cases</p>
+          {isLocalLoading ? (
+            <Spin />
+          ) : (
+            <>
+              <p>{formatNumber(cases)}</p>
+              <p>
+                +{formatNumber(todayCases)} {t("Detail.InfoCard.NewCases")}
+              </p>
+            </>
+          )}
         </Card>
         <Card
           size="small"
-          title={
-            <Text className="recovered-card__title">
-              {t("Detail.InfoCard.Recovered")}
-            </Text>
-          }
+          title={<Text>{t("Detail.InfoCard.Recovered")}</Text>}
           className="recovered-card"
         >
-          <p>{formatNumber(recovered)}</p>
-          <p>+{formatNumber(todayRecovered)} new recovered</p>
+          {isLocalLoading ? (
+            <Spin />
+          ) : (
+            <>
+              <p>{formatNumber(recovered)}</p>
+              <p>
+                +{formatNumber(todayRecovered)} {t("Detail.InfoCard.NewCases")}
+              </p>
+            </>
+          )}
         </Card>
         <Card
           size="small"
-          title={
-            <Text className="deaths-card__title">
-              {t("Detail.InfoCard.Deaths")}
-            </Text>
-          }
+          title={<Text>{t("Detail.InfoCard.Deaths")}</Text>}
           className="deaths-card"
         >
-          <p>{formatNumber(deaths)}</p>
-          <p>+{formatNumber(todayDeaths)} new deaths</p>
+          {isLocalLoading ? (
+            <Spin />
+          ) : (
+            <>
+              <p>{formatNumber(deaths)}</p>
+              <p>
+                +{formatNumber(todayDeaths)} {t("Detail.InfoCard.NewCases")}
+              </p>
+            </>
+          )}
         </Card>
       </div>
     </div>

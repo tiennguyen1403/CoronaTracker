@@ -14,6 +14,11 @@ function CountrySelector({ countries, history }) {
     return countries.map((country, index) => {
       return (
         <Option key={index} value={country.countryInfo.iso2}>
+          <img
+            src={country.countryInfo.flag}
+            alt="flag"
+            style={{ width: 20, marginRight: 5 }}
+          />
           {country.country}
         </Option>
       );
@@ -28,9 +33,6 @@ function CountrySelector({ countries, history }) {
         placeholder="Select a country"
         optionFilterProp="children"
         onChange={onChange}
-        filterOption={(input, option) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
       >
         {renderCountryOption()}
       </Select>

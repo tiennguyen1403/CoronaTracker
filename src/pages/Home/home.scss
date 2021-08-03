@@ -1,7 +1,8 @@
 .home-container{
-    margin-top: 25px;
     width: 100%;
-    padding: 0 10px;
+    padding: 25px 10px;
+    transition: all .4s;
+
     .home{
         &__info-card{
             border: 1px solid#cbd5e0;
@@ -27,10 +28,13 @@
                     text-align: center;
                     font-weight: bold;
                     height: 110px;
+                    div.ant-spin.ant-spin-spinning{
+                        transform: translateY(50%);
+                    }
                 }
                 .infected-card{
                     background: #fff5f5;
-                    &__title{
+                    span.ant-typography{
                         color: #e53e3e;
                     }
                     div.ant-card-head{
@@ -41,10 +45,13 @@
                         margin-bottom: 0;
                         line-height: 40px;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #e53e3e;
+                    }
                 }
                 .recovered-card{
                     background: #f0fff4;
-                    &__title{
+                    span.ant-typography{
                         color: #38a169;
                     }
                     div.ant-card-head{
@@ -55,10 +62,13 @@
                         margin-bottom: 0;
                         line-height: 40px;
                     }
+                    i.ant-spin-dot-item{
+                        background-color: #38a169;
+                    }
                 }
                 .deaths-card{
                     background: #edf2f7;
-                    &__title{
+                    span.ant-typography{
                         color: #718096;
                     }
                     div.ant-card-head{
@@ -68,6 +78,10 @@
                         color: #718096;
                         margin-bottom: 0;
                         line-height: 40px;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #718096;
+                        line-height: 50px;
                     }
                 }
             }
@@ -79,17 +93,224 @@
             }
         }
         &__info-table{
+            border-radius: 5px;
+            margin-top: 15px;
             .table{
                 width: 100%;
                 overflow-x: scroll;
+                div.ant-select-selector{
+                    display: none;
+                }
+                .ant-table-pagination-right{
+                    justify-content: center;
+                }
+                li.ant-pagination-options{
+                    display: none;
+                }
             }
-            border-radius: 5px;
-            margin-top: 15px;
             .title{
                 padding: 5px 0;
                 padding-left: 10px;
                 border-left: 5px solid #108885;
                 color: #108885;
+            }
+        }
+    }
+}
+
+.dark-home-container{
+    width: 100%;
+    padding: 25px 10px;
+    background: #121212;
+    color: white;
+    transition: all .4s;
+    
+    .home{
+        &__info-card{
+            border: 1px solid white;
+            border-radius: 5px;
+            padding: 10px;
+            .title{
+                margin: 0;
+                color: #b0b3b8;
+            }
+            & > .country-selector{
+                .select{
+                    width: 100%;
+                    margin: 10px 0;
+                }
+            }
+            .card-group{
+                display: flex;
+                justify-content: space-between;
+                .infected-card,
+                .recovered-card,
+                .deaths-card{
+                    width: 31%;
+                    border-radius: 5px;
+                    text-align: center;
+                    font-weight: bold;
+                    height: 110px;
+                    div.ant-spin.ant-spin-spinning{
+                        transform: translateY(50%);
+                    }
+                }
+                .infected-card{
+                    background: #fff5f5;
+                    span.ant-typography{
+                        color: #e53e3e;
+                    }
+                    div.ant-card-head{
+                        background: #fed7d7;
+                    }
+                    p{
+                        color: #e53e3e;
+                        margin-bottom: 0;
+                        line-height: 40px;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #e53e3e;
+                    }
+                }
+                .recovered-card{
+                    background: #f0fff4;
+                    span.ant-typography{
+                        color: #38a169;
+                    }
+                    div.ant-card-head{
+                        background: #c6f6d5;
+                    }
+                    p{
+                        color: #38a169;
+                        margin-bottom: 0;
+                        line-height: 40px;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #38a169;
+                    }
+                }
+                .deaths-card{
+                    background: #edf2f7;
+                    span.ant-typography{
+                        color: #718096;
+                    }
+                    div.ant-card-head{
+                        background: #e2e8f0;
+                    }
+                    p{
+                        color: #718096;
+                        margin-bottom: 0;
+                        line-height: 40px;
+                    }
+                    i.ant-spin-dot-item{
+                        background-color: #718096;
+                        line-height: 50px;
+                    }
+                }
+            }
+            & > a{
+                display: block;
+                text-align: center;
+                font-weight: bold;
+                margin-top: 5px;
+            }
+            div.ant-select-selector{
+                background: none;
+                border-color: white;
+                color: white;
+            }
+        }
+        &__info-table{
+            border-radius: 5px;
+            margin-top: 15px;
+
+            .table{
+                width: 100%;
+                overflow-x: scroll;
+                border: 1px solid white;
+                border-radius: 5px;
+                div.ant-select-selector{
+                    display: none;
+                }
+                div.ant-table{
+                    background: #121212;
+                    color: #b0b3b8;
+                }
+                th.ant-table-cell.ant-table-cell{
+                    background: #121212;
+                    color: #b0b3b8;
+                }
+                td.ant-table-cell.ant-table-cell{
+                    background: #121212;
+                    color: #b0b3b8;
+                }
+                .ant-pagination-item-link{
+                    border-color: white;
+                    background: none;
+                    color: white;
+                }
+                li.ant-pagination-item.ant-pagination-item-active{
+                    a{
+                        color: #1890ff;
+                    }
+                }
+                li.ant-pagination-item{
+                    border-color: white;
+                    background: none;
+                    a{
+                        color: white;
+                    }
+                }
+                .ant-table-pagination-right{
+                    justify-content: center;
+                }
+                li.ant-pagination-options{
+                    display: none;
+                }
+            }
+            .title{
+                padding: 5px 0;
+                padding-left: 10px;
+                border-left: 5px solid #b0b3b8;
+                color: #b0b3b8;
+            }
+
+        }
+        & > .news-list-container{
+            .title{
+                border-left: 5px solid #b0b3b8;
+                color: #b0b3b8;
+            }
+            .news-list{
+                .news-item{
+                    &__content{
+                        p{
+                            a{
+                                color: white;
+                            }
+                        }
+                        span{
+                            color: white;
+                        }
+                    }
+                }
+            }
+            .ant-pagination-item-link{
+                border-color: white;
+                background: none;
+                color: white;
+            }
+            li.ant-pagination-item.ant-pagination-item-active{
+                a{
+                    color: #1890ff;
+                }
+            }
+            li.ant-pagination-item{
+                border-color: white;
+                background: none;
+                a{
+                    color: white;
+                }
             }
         }
     }
@@ -113,6 +334,38 @@
                         p{
                             font-size: 23px;
                             line-height: 60px;
+                        }
+                        div.ant-spin.ant-spin-spinning{
+                            transform: translateY(90%);
+                        }
+                    }
+                }
+                & > a{
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+    .dark-home-container{
+        .home{
+            &__info-card{
+                .title{
+                    font-size: 18px;
+                }
+                .card-group{
+                    .infected-card,
+                    .recovered-card,
+                    .deaths-card{
+                        height: 130px;
+                        &__title{
+                            font-size: 16px;
+                        }
+                        p{
+                            font-size: 23px;
+                            line-height: 60px;
+                        }
+                        div.ant-spin.ant-spin-spinning{
+                            transform: translateY(90%);
                         }
                     }
                 }
@@ -150,10 +403,36 @@
             }
         }
     }
+    .dark-home-container{
+        .home{
+            &__info-card{
+                .title{
+                    font-size: 20px;
+                }
+                .card-group{
+                    .infected-card,
+                    .recovered-card,
+                    .deaths-card{
+                        &__title{
+                            font-size: 18px;
+                        }
+                        p{
+                            font-size: 27px;
+                            line-height: 55px;
+                        }
+                    }
+                }
+                & > a{
+                    font-size: 17px;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (min-width: 992px){
     .home-container{
+        min-height: 1130px;
         .home{
             &__info-card{
                 width: 53%;
@@ -182,7 +461,34 @@
             }
         }
     }
-    .footer-container{
-        clear: both;
+    .dark-home-container{
+        min-height: 1130px;
+        .home{
+            &__info-card{
+                width: 53%;
+                float: left;
+                .card-group{
+                    .infected-card,
+                    .recovered-card,
+                    .deaths-card{
+                        width: 32%;
+                        p{
+                            font-size: 23px;
+                        }
+                    }
+                }
+            }
+            &__info-table{
+                float: right;
+                width: 46%;
+                margin-top: 0;
+                margin-bottom: 20px;
+            }
+            & > .news-list-container{
+                float: left;
+                margin: 20px 0;
+                width: 53%;
+            }
+        }
     }
 }

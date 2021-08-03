@@ -34,7 +34,9 @@ function DetailCountry({ history }) {
         dispatch(GlobalActions.setCountries(res.data));
         dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
   const getDetailCountry = () => {
     axios(`https://disease.sh/v3/covid-19/countries/${countrycode}`)
@@ -42,7 +44,9 @@ function DetailCountry({ history }) {
         dispatch(GlobalActions.setDetailCountry(res.data));
         dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
   const getDetailHistory = () => {
     axios(
@@ -52,7 +56,9 @@ function DetailCountry({ history }) {
         setDetailHistory(res.data.timeline);
         dispatch(GlobalActions.setIsLoading(false));
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => {
+        dispatch(GlobalActions.setIsLoading(false));
+      });
   };
 
   return (

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import "./register.scss";
+import React from "react";
 import axios from "axios";
+import "./register.scss";
 import { Formik, Form, FastField } from "formik";
 import * as Yup from "yup";
-import { Modal, notification } from "antd";
+import { Modal } from "antd";
 
 import InputField from "../InputField";
 
 function Register(props) {
-  const { isRegisterVisible, toggleRegister } = props;
-  const [userList, setUserList] = useState([]);
+  const { userList, isRegisterVisible, toggleRegister, onRegisterSuccess } =
+    props;
   const initialValues = {
     username: "",
     email: "",
@@ -17,19 +17,6 @@ function Register(props) {
     confirmPassword: "",
   };
 
-  useEffect(() => {
-    getUserList();
-  }, []);
-
-  const getUserList = () => {
-    axios("https://corona--tracker.herokuapp.com/userlist")
-      .then((res) => {
-        setUserList(res.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
   const registerSchema = Yup.object().shape({
     username: Yup.string()
       .min(2, "Username is too short!")
@@ -54,18 +41,12 @@ function Register(props) {
         email: values.email,
       })
       .then((res) => {
-        getUserList(); //call API to refresh userList
+        onRegisterSuccess();
         resetForm();
-        openSuccessNotification();
       })
       .catch((err) => {
         console.log(err.response);
       });
-  };
-  const openSuccessNotification = () => {
-    notification["success"]({
-      message: "Register successfully",
-    });
   };
 
   return (

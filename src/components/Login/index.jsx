@@ -1,6 +1,5 @@
 import "./login.scss";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import { Formik, Form, FastField } from "formik";
 import * as Yup from "yup";
 import { Modal, notification } from "antd";
@@ -8,26 +7,13 @@ import { Modal, notification } from "antd";
 import InputField from "../InputField";
 
 function Login(props) {
-  const { isLoginVisible, toggleLogin, onLoginSuccess } = props;
-  const [userList, setUserList] = useState([]);
+  const { userList, isLoginVisible, toggleLogin, onLoginSuccess } = props;
+  const [errorMessage, setErrorMessage] = useState("");
   const initialValues = {
     username: "",
     password: "",
   };
 
-  useEffect(() => {
-    getUserList();
-  }, []);
-
-  const getUserList = () => {
-    axios("https://corona--tracker.herokuapp.com/userlist")
-      .then((res) => {
-        setUserList(res.data);
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
   const loginSchema = Yup.object().shape({
     username: Yup.string()
       .min(2, "Username is too short!")
@@ -41,6 +27,7 @@ function Login(props) {
   const handleUserSubmit = (values, { resetForm }) => {
     if (userList.length === 0) {
       if (values.username === "admin" && values.password === "admin") {
+        setErrorMessage("");
         onLoginSuccess();
         resetForm();
         openSuccessNotification();
@@ -53,6 +40,7 @@ function Login(props) {
         values.username === userItem.username &&
         values.password === userItem.password
       ) {
+        setErrorMessage("");
         onLoginSuccess();
         resetForm();
         openSuccessNotification();
@@ -61,6 +49,7 @@ function Login(props) {
       }
       return null;
     });
+    setErrorMessage("Account is incorrect");
     return false;
   };
   const openSuccessNotification = () => {
@@ -73,6 +62,7 @@ function Login(props) {
     <Modal closable={false} visible={isLoginVisible} footer={null}>
       <div className="login">
         <h1>Login</h1>
+        <div className="error-box">{errorMessage}</div>
         <Formik
           initialValues={initialValues}
           validationSchema={loginSchema}
@@ -99,7 +89,13 @@ function Login(props) {
                 <div className="error-box">{errors.password}</div>
               ) : null}
               <div className="btn-group">
-                <button type="reset" onClick={toggleLogin}>
+                <button
+                  type="reset"
+                  onClick={() => {
+                    toggleLogin();
+                    setErrorMessage("");
+                  }}
+                >
                   Cancel
                 </button>
                 <button type="submit">Submit</button>

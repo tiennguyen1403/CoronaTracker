@@ -50,8 +50,8 @@ function Header() {
     openLogoutNotification();
   };
   const handleLoginSuccess = () => {
-    history.push("/");
     setIsUserLogin(true);
+    history.push("/");
   };
   const handleRegisterSuccess = () => {
     getUserList();
